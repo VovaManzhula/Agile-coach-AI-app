@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import chatReducer from "./store/chatSlice";
+import Sidebar from "./components/Sidebar";
+import ChatPage from "./components/ChatPage";
 
-function App() {
+const store = configureStore({
+  reducer: {
+    chat: chatReducer,
+  },
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Sidebar />
+      <ChatPage />
+    </Provider>
   );
-}
+};
 
 export default App;
